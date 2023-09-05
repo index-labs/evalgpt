@@ -9,6 +9,8 @@
 Eval GPT is a software that empowers Large Language Models (LLMs), such as GPT4, with tool usage capabilities. It
 interacts with LLMs to obtain problem-solving steps, then selects the appropriate tool agent to resolve the issue.
 
+https://github.com/index-labs/evalgpt/assets/7857126/de771da2-3283-4bbf-9219-1a42f483477c
+
 ## Benefits
 
 - Command Line Tool
@@ -202,4 +204,3 @@ date,dau
 output:
 
 ![](images/example_dau.png)
-
