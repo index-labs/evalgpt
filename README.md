@@ -46,7 +46,11 @@ cd evalgpt
 
 go mod tidy && go mod vendor
 
+mkdir -p ./bin
+
 go build -o ./bin/evalgpt ./*.go
+
+./bin/evalgpt -h
 ```
 
 Then you can find it on bin directory.
