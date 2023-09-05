@@ -19,7 +19,7 @@ interacts with LLMs to obtain problem-solving steps, then selects the appropriat
 
 ## Architecture
 
-![](./architecture.png)
+![](images/architecture.png)
 
 ## Quick Start 🚀
 
@@ -142,8 +142,15 @@ Your public IP is: 104.28.240.133
 Calculate the sha256 hash of a string:
 
 ```bash
-❯ ./bin/evalgpt -q 'calculate the sha256 of the "hello,world"'
+❯ evalgpt -q 'calculate the sha256 of the "hello,world"'
 77df263f49123356d28a4a8715d25bf5b980beeeb503cab46ea61ac9f3320eda
+```
+
+Get the title of a website:
+
+```bash
+❯ evalgpt -q "get the title of a website: https://arxiv.org/abs/2302.04761" -v
+[2302.04761] Toolformer: Language Models Can Teach Themselves to Use Tools
 ```
 
 **Pipeline**
@@ -177,4 +184,22 @@ created file: a.webp
 > ls
 a.png a.webp
 ```
+
+Draw a line graph based on the data from the CSV
+
+```bash
+> cat a.csv
+date,dau
+2023-08-20,1000
+2023-08-21,900
+2023-08-22,1100
+2023-08-23,2000
+2023-08-24,1800
+
+> evalgpt -q 'draw a line graph based on the data from the CSV' --file ./a.csv
+```
+
+output:
+
+![](images/example_dau.png)
 
