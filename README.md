@@ -6,36 +6,20 @@
 
 ## What is Eval GPT
 
-The code interpreter tool invokes the LLM to generate Python code. The LLM takes inputs, uses its deep learning
-capabilities to generate corresponding Python code. This generated code is then executed by the code interpreter,
-returning the execution results.
+Eval GPT is a software that empowers Large Language Models (LLMs), such as GPT4, with tool usage capabilities. It
+interacts with LLMs to obtain problem-solving steps, then selects the appropriate tool agent to resolve the issue.
 
 ## Benefits
 
--
-
-## How it works
-
-1. It utilizes the Language Learning Model (LLM) to transform user inputs into Python code. This is achieved through the
-   LLM's deep learning capabilities.
-2. The generated Python code is then executed by the code interpreter, which returns the results of the execution.
-
-```bash
-$ evalgpt -q "calculate MD5 of the string 'hello, world'" 
-The MD5 hash of "hello, world" is: e4d7f1b4ed2e42d15898f4b27b019da4
-```
-
-And another example:
-
-```bash
-$ evalgpt -q "the title of the link: https://arxiv.org/abs/2302.04761" 
-[2302.04761] Toolformer: Language Models Can Teach Themselves to Use Tools
-```
+- Command Line Tool
+- Restful API [TODO]
+- Access internet with python requests lib
+- Interact with files
+- Extensibility with Plugins [TODO]
 
 ## Architecture
 
 ![](./architecture.png)
-
 
 ## Quick Start 🚀
 
@@ -52,6 +36,20 @@ You could verify the installation by running the following command:
 ```bash
 evalgpt -h
 ```
+
+### Build it from source code
+
+```bash
+git clone https://github.com/index-labs/evalgpt.git
+
+cd evalgpt
+
+go mod tidy && go mod vendor
+
+go build -o ./bin/evalgpt ./*.go
+```
+
+Then you can find it on bin directory.
 
 ### Configuration
 
