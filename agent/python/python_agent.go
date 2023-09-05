@@ -1,4 +1,4 @@
-package interpreter
+package python
 
 import (
 	"context"
@@ -19,21 +19,21 @@ type Config struct {
 	Model             string
 }
 
-type Service struct {
-	python       string
-	model        string
-	openaiClient *openai.Client
+type PythonAgent struct {
+	pythonInterpreter string
+	model             string
+	openaiClient      *openai.Client
 }
 
-func NewInterpreterService(cfg Config) *Service {
-	return &Service{
-		python:       cfg.PythonInterpreter,
-		openaiClient: openai.NewClient(cfg.OpenaiApiKey),
-		model:        cfg.Model,
+func NewPythonAgent(cfg Config) *PythonAgent {
+	return &PythonAgent{
+		pythonInterpreter: cfg.PythonInterpreter,
+		openaiClient:      openai.NewClient(cfg.OpenaiApiKey),
+		model:             cfg.Model,
 	}
 }
 
-func (p *Service) HandleQuery(query string, fileList []string) (result string, outputFiles []string, err error) {
+func (p *PythonAgent) HandleQuery(query string, fileList []string) (result string, outputFiles []string, err error) {
 	log.Infof("handle query: %s", query)
 	if len(fileList) > 0 {
 		query += "/n/n"
@@ -82,7 +82,7 @@ func (p *Service) HandleQuery(query string, fileList []string) (result string, o
 	return
 }
 
-func (p *Service) Interpret(code string, fileList []string) (output string, outputFiles []string, err error) {
+func (p *PythonAgent) Interpret(code string, fileList []string) (output string, outputFiles []string, err error) {
 	workDir, err := os.MkdirTemp("/tmp", "interpreter_")
 	if err != nil {
 		err = fmt.Errorf("create tmp work dir failed: %v", err)
@@ -112,7 +112,7 @@ func (p *Service) Interpret(code string, fileList []string) (output string, outp
 		err = fmt.Errorf("write code file failed: %v", err)
 		return
 	}
-	output, err = utils.RunCmdWithTimeout(workDir, -1, p.python, codeFilepath)
+	output, err = utils.RunCmdWithTimeout(workDir, -1, p.pythonInterpreter, codeFilepath)
 	if err != nil {
 		err = fmt.Errorf("run cmd failed: %v", err)
 		return

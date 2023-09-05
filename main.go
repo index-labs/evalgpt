@@ -4,7 +4,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/index-labs/evalgpt/service/interpreter"
+	"github.com/index-labs/evalgpt/agent/python"
+	"github.com/index-labs/evalgpt/scheduler"
 	"github.com/index-labs/evalgpt/utils"
 
 	log "github.com/sirupsen/logrus"
@@ -91,12 +92,17 @@ func run(ctx *cli.Context) error {
 	}
 	log.Infof("model: %s, pythonInterpreter: %s", model, pythonInterpreter)
 
-	svc := interpreter.NewInterpreterService(interpreter.Config{
+	pyAgent := python.NewPythonAgent(python.Config{
 		PythonInterpreter: pythonInterpreter,
 		OpenaiApiKey:      openaiApiKey,
 		Model:             model,
 	})
-	result, outputFiles, err := svc.HandleQuery(query, fileList)
+
+	sched := scheduler.NewScheduler(scheduler.Config{
+		PythonAgent: pyAgent,
+	})
+
+	result, outputFiles, err := sched.HandleQuery(query, fileList)
 	if err != nil {
 		return err
 	}
