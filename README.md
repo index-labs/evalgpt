@@ -1,15 +1,15 @@
 <div align="center">
 
-# Eval GPT
+# EvalGPT
 
 </div>
 
-## What is Eval GPT
+## What is EvalGPT
 
-Eval GPT is a software that empowers Large Language Models (LLMs), such as GPT4, with tool usage capabilities. It
+EvalGPT is a framework that empowers Large Language Models (LLMs), such as GPT-4 / Code Llama, with tool usage capabilities. It
 interacts with LLMs to obtain problem-solving steps, then selects the appropriate tool agent to resolve the issue.
 
-https://github.com/index-labs/evalgpt/assets/7857126/de771da2-3283-4bbf-9219-1a42f483477c
+![](images/architecture.png)
 
 ## Benefits
 
@@ -19,9 +19,9 @@ https://github.com/index-labs/evalgpt/assets/7857126/de771da2-3283-4bbf-9219-1a4
 - Interact with files
 - Extensibility with Plugins [TODO]
 
-## Architecture
+## Demo
 
-![](images/architecture.png)
+https://github.com/index-labs/evalgpt/assets/7857126/de771da2-3283-4bbf-9219-1a42f483477c
 
 ## Quick Start 🚀
 
@@ -99,7 +99,7 @@ evalgpt --python-interpreter /path/evalgpt/venv/bin/python3 -q <query>
 Before tackling complex tasks, ensure to install necessary Python third-party libraries. This equips your code
 interpreter to handle corresponding tasks, boosting efficiency and ensuring smooth operation.
 
-### Usage
+## Usage
 
 **Help**
 
