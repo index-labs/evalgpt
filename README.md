@@ -213,3 +213,41 @@ date,dau
 output:
 
 ![](images/example_dau.png)
+
+## Architecture Details
+
+### EvalGPT Master Node
+
+The EvalGPT master node serves as the control center of the framework. It houses three critical components: planning, scheduler, and memory.
+
+The planning component leverages large language models to plan tasks based on the user's request. It breaks down complex tasks into smaller, manageable sub-tasks, each of which is handled by an individual EvalAgent node.
+
+The scheduler component is responsible for task distribution. It assigns each sub-task to an EvalAgent node, ensuring efficient utilization of resources and parallel execution of tasks for optimal performance.
+
+The memory component serves as the shared memory space for all EvalAgent nodes. It stores the results of executed tasks and provides a platform for data exchange between different nodes. This shared memory model facilitates complex computations and aids in error handling by allowing for task replanning in case of errors.
+
+In the event of an error during code execution, the master node replans the task to avoid the error, thereby ensuring robust and reliable operation.
+
+Finally, the EvalGPT master node collects the results from all EvalAgent nodes, compiles them, and generates the final answer for the user's request. This centralized control and coordination make the EvalGPT master node a crucial part of the EvalGPT framework.
+
+### EvalAgent Node
+
+EvalAgent nodes are the workhorses of the EvalGPT framework. Spawned by the master node for each sub-task, they're responsible for code generation, execution, and result collection.
+
+The code generation process in an EvalAgent node is guided by the specific task it's assigned. Using the large language model, it produces the necessary code to accomplish the task, ensuring it's suited to the task's requirements and complexity.
+
+Once the code is generated, the EvalAgent node initiates a runtime environment to execute the code. This runtime is flexible, capable of incorporating external tools as needed, and provides a robust platform for code execution.
+
+During execution, the EvalAgent node collects the results and can access the shared memory from the EvalGPT master node. This allows for efficient data exchange and facilitates complex computations requiring significant data manipulation or access to previously computed results.
+
+In case of any errors during code execution, the EvalAgent node reports these back to the EvalGPT master node. The master node then replans the task to avoid the error, ensuring a robust and reliable operation.
+
+In essence, EvalAgent nodes are autonomous units within the EvalGPT framework, capable of generating and executing code, handling errors, and communicating results efficiently.
+
+### Runtime
+
+The runtime of EvalGPT is managed by EvalAgent nodes. Each EvalAgent node generates code for a specific task and initiates a runtime to execute the code. The runtime environment is flexible and can incorporate external tools as necessary, providing a highly adaptable execution context.
+
+The runtime also includes error handling mechanisms. If an EvalAgent node encounters any errors during code execution, it reports these back to the EvalGPT master node. The master node then replans the task to avoid the error, ensuring robust and reliable code execution.
+
+The runtime can interact with the EvalGPT master node's memory, enabling efficient data exchange and facilitating complex computations. This shared memory model allows for the execution of tasks that require significant data manipulation or access to previously computed results.
