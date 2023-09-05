@@ -6,6 +6,8 @@
 
 ## What is EvalGPT
 
+🧩 This project is still in the early stages of development, and we are actively working on it. If you have any questions or suggestions, please submit an issue or PR.
+
 EvalGPT is an code interpreter framework, leveraging the power of large language models such as GPT-4, CodeLlama, and Claude 2. This powerful tool allows users to write tasks, and EvalGPT will assist in writing the code, executing it, and delivering the results.
 
 ![](images/architecture.png)
