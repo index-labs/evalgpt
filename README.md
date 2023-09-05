@@ -22,11 +22,17 @@ Finally, the EvalGPT master node collates all results from the EvalAgent nodes a
 
 ## Benefits
 
-- Command Line Tool
-- Restful API [TODO]
-- Access internet with python requests lib
-- Interact with files
-- Extensibility with Plugins [TODO]
+1. **Automated Code Writing**: EvalGPT leverages advanced language models to auto-generate code, reducing manual effort and increasing productivity.
+
+2. **Efficient Task Execution**: By breaking down complex tasks into manageable sub-tasks, EvalGPT ensures efficient and parallel execution, speeding up the overall process.
+
+3. **Robust Error Handling**: With its ability to replan tasks in case of errors, EvalGPT ensures reliable operation and accurate results.
+
+4. **Scalability**: EvalGPT is built to handle tasks of varying complexity, making it a scalable solution for a wide range of coding needs.
+
+5. **Resource Optimization**: Inspired by Google Borg's resource management, EvalGPT optimally utilizes computational resources, leading to improved performance.
+
+6. **Extensibility**: With the ability to incorporate external tools into its runtime, EvalGPT is highly adaptable and can be extended to handle a diverse range of tasks.
 
 ## Demo
 
