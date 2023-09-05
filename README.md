@@ -6,10 +6,19 @@
 
 ## What is EvalGPT
 
-EvalGPT is a framework that empowers Large Language Models (LLMs), such as GPT-4 / Code Llama, with tool usage capabilities. It
-interacts with LLMs to obtain problem-solving steps, then selects the appropriate tool agent to resolve the issue.
+EvalGPT is an code interpreter framework, leveraging the power of large language models such as GPT-4, CodeLlama, and Claude 2. This powerful tool allows users to write tasks, and EvalGPT will assist in writing the code, executing it, and delivering the results.
 
 ![](images/architecture.png)
+
+EvalGPT's architecture draws inspiration from [Google's Borg system](https://research.google/pubs/pub43438/). It includes a master node, known as EvalGPT, composed of three components: planning, scheduler, and memory.
+
+When EvalGPT receives a request, it starts planning the task using a Large Language Model (LLM), dividing larger tasks into smaller, manageable ones. For each sub-task, EvalGPT will spawn a new node known as an EvalAgent.
+
+Each EvalAgent is responsible for generating the code based on the assigned small task. Once the code is generated, the EvalAgent initiates a runtime to execute the code, even harnessing external tools when necessary. The results are then collected by the EvalAgent.
+
+EvalAgent nodes can access the memory from the EvalGPT master node, allowing for efficient and effective communication. If an EvalAgent encounters any errors during the process, it reports the error to the EvalGPT master node, which then replans the task to avoid the error.
+
+Finally, the EvalGPT master node collates all results from the EvalAgent nodes and generates the final answer for the request.
 
 ## Benefits
 
