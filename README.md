@@ -30,7 +30,7 @@ Finally, the EvalGPT master node collates all results from the EvalAgent nodes a
 
 ## Demo
 
-https://github.com/index-labs/evalgpt/assets/7857126/de771da2-3283-4bbf-9219-1a42f483477c
+https://github.com/index-labs/evalgpt/assets/7857126/73417c1f-8866-47fb-951a-7fd03c9dbf41
 
 ## Quick Start 🚀
 
