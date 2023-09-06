@@ -16,6 +16,7 @@ import (
 type Config struct {
 	PythonInterpreter string
 	OpenaiApiKey      string
+	OpenaiBaseURL     string
 	Model             string
 }
 
@@ -26,9 +27,15 @@ type PythonAgent struct {
 }
 
 func NewPythonAgent(cfg Config) *PythonAgent {
+
+	openaiConfig := openai.DefaultConfig(cfg.OpenaiApiKey)
+	if len(cfg.OpenaiBaseURL) > 0 {
+		openaiConfig.BaseURL = cfg.OpenaiBaseURL
+	}
+
 	return &PythonAgent{
 		pythonInterpreter: cfg.PythonInterpreter,
-		openaiClient:      openai.NewClient(cfg.OpenaiApiKey),
+		openaiClient:      openai.NewClientWithConfig(openaiConfig),
 		model:             cfg.Model,
 	}
 }

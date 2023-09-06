@@ -25,6 +25,11 @@ func main() {
 				Required: true,
 			},
 			&cli.StringFlag{
+				Name:    "openai-base-url",
+				Usage:   "Openai Base URL",
+				EnvVars: []string{"OPENAI_BASE_URL"},
+			},
+			&cli.StringFlag{
 				Name:    "model",
 				Usage:   "LLM name",
 				Value:   "gpt-4-0613",
@@ -77,6 +82,7 @@ func main() {
 
 func run(ctx *cli.Context) error {
 	openaiApiKey := ctx.String("openai-api-key")
+	openaiBaseURL := ctx.String("openai-base-url")
 	model := ctx.String("model")
 	pythonInterpreter := ctx.String("python-interpreter")
 	query := ctx.String("query")
@@ -109,6 +115,7 @@ func run(ctx *cli.Context) error {
 	pyAgent := python.NewPythonAgent(python.Config{
 		PythonInterpreter: pythonInterpreter,
 		OpenaiApiKey:      openaiApiKey,
+		OpenaiBaseURL:     openaiBaseURL,
 		Model:             model,
 	})
 
