@@ -1,8 +1,11 @@
 package scheduler
 
-import "github.com/index-labs/evalgpt/agent/python"
+import (
+	"github.com/gin-gonic/gin"
+	"github.com/index-labs/evalgpt/agent/python"
+)
 
-type Schedule struct {
+type Scheduler struct {
 	pythonAgent *python.PythonAgent
 }
 
@@ -10,13 +13,19 @@ type Config struct {
 	PythonAgent *python.PythonAgent
 }
 
-func NewScheduler(cfg Config) *Schedule {
-	return &Schedule{
+func NewScheduler(cfg Config) *Scheduler {
+	return &Scheduler{
 		pythonAgent: cfg.PythonAgent,
 	}
 }
 
-func (p *Schedule) HandleQuery(query string, fileList []string) (result string, outputFiles []string, err error) {
+func (p *Scheduler) HandleQuery(query string, fileList []string) (result string, outputFiles []string, err error) {
 	// TODO: add schedule logic here
 	return p.pythonAgent.HandleQuery(query, fileList)
+}
+
+func (p *Scheduler) Run(addr string) (err error) {
+	r := gin.Default()
+	r.POST("/query", p.HandleQueryRequest)
+	return r.Run(addr)
 }
