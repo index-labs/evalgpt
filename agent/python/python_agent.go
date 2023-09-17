@@ -2,6 +2,7 @@ package python
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"os"
 	"path"
@@ -169,12 +170,19 @@ func extractFileMeta(filename string) (meta string, err error) {
 }
 
 func extractPythonCode(content string) (code string, err error) {
-	ss := strings.SplitN(content, "```python", -1)
-	if len(ss) < 2 {
-		err = fmt.Errorf("cant't find python code")
-		return
+	if !strings.Contains(content, "```python") {
+		return "", errors.New("content does not contain python code block")
 	}
-	ss = strings.SplitN(ss[1], "```", -1)
-	code = strings.TrimSpace(ss[0])
-	return
+
+	secs := strings.SplitN(content, "```python", 2)
+	if len(secs) < 2 {
+		return "", errors.New("failed to split by python code block start marker")
+	}
+
+	codeSecs := strings.SplitN(secs[1], "```", 2)
+	if len(codeSecs) < 2 {
+		return "", errors.New("failed to split by python code block end marker")
+	}
+
+	return strings.TrimSpace(codeSecs[0]), nil
 }
